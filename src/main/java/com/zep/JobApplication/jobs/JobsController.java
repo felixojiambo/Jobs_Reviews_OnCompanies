@@ -9,14 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class JobsController {
-    private List<Jobs> jobs=new ArrayList<>();
+ private  JobsService jobsService;
+
+    public JobsController(JobsService jobsService) {
+        this.jobsService = jobsService;
+    }
+
     @GetMapping("/jobs")
     public List<Jobs> findAll(){
-        return  jobs;
+        return jobsService.findAll();
     }
     @PostMapping("/jobs")
-    public  String createJob(@RequestBody Jobs  job){
-        jobs.add(job);
-        return  "Job added successfully";
+    public  String createJobs(@RequestBody Jobs  job){
+       jobsService.createJobs(job);
+       return  "Jobs added succesfully";
     }
 }
