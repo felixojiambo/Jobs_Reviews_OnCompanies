@@ -7,4 +7,6 @@ public interface JobsService {
 
     List<Jobs> findAll();
     void createJobs(Jobs job);
+
+    Jobs getJobsByID(Long id);
 }
