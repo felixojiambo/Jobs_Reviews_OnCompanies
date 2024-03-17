@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/crud")//At class level, request mapping sets a base url
 public class JobsController {
     private JobsService jobsService;
 
@@ -43,6 +43,8 @@ public class JobsController {
         return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @PutMapping("/jobs/{id}")
+    //we can use request mapping at method levelin every request in the above instead of using specialised methods
+    //@RequestMapping9(value="/jobs/{id},method=RequestMethod.PUT)
 public  ResponseEntity<String>updateJob(@PathVariable Long id ,@RequestBody Jobs updatedJob){
         boolean updated=jobsService.updateJob(id,updatedJob);
         if(updated)
