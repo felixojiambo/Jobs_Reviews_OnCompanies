@@ -1,29 +1,38 @@
 package com.zep.JobApplication.jobs;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 @RestController
+@RequestMapping("/jobs")
 public class JobsController {
- private  JobsService jobsService;
+    private JobsService jobsService;
 
     public JobsController(JobsService jobsService) {
         this.jobsService = jobsService;
     }
 
     @GetMapping("/jobs")
-    public List<Jobs> findAll(){
-        return jobsService.findAll();
+    public ResponseEntity<List<Jobs>> findAll() {
+        return ResponseEntity.ok(jobsService.findAll());
     }
+
     @PostMapping("/jobs")
-    public  String createJobs(@RequestBody Jobs  job){
-       jobsService.createJobs(job);
-       return  "Jobs added succesfully";
+    public ResponseEntity<String> createJobs(@RequestBody Jobs job) {
+        jobsService.createJobs(job);
+        return  new ResponseEntity<>("Job added successfully",HttpStatus.OK);
     }
+
     @GetMapping("/jobs/{id}")
-    public Jobs getJobsByID(@PathVariable Long id){
-  Jobs job=jobsService.getJobsByID(id);
-  return  job;
+    public ResponseEntity<Jobs> getJobsByID(@PathVariable Long id) {
+
+        Jobs job = jobsService.getJobsByID(id);
+        if (job != null)
+            return new ResponseEntity<>(job, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 }
