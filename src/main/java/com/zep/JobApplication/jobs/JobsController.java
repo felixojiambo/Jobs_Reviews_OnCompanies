@@ -1,5 +1,6 @@
 package com.zep.JobApplication.jobs;
 
+import com.zep.JobApplication.companies.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,9 @@ public class JobsController {
     @PostMapping("/jobs")
     public ResponseEntity<String> createJobs(@RequestBody Jobs job) {
         jobsService.createJobs(job);
+        //Company c=job.getCompany();
         return  new ResponseEntity<>("Job added successfully",HttpStatus.OK);
     }
-
     @GetMapping("/jobs/{id}")
     public ResponseEntity<Jobs> getJobsByID(@PathVariable Long id) {
 

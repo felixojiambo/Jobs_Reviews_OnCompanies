@@ -11,5 +11,4 @@ public class JobApplication {
 		SpringApplication.run(JobApplication.class, args);
 		System.out.print("server running on default tomcat port");
 	}
-
 }
