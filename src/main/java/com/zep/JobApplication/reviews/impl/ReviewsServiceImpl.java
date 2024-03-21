@@ -26,11 +26,13 @@ return  reviews;
     }
 
     @Override
-    public void addReviews(Long companyid, Reviews reviews) {
+    public boolean addReviews(Long companyid, Reviews reviews) {
         Company company=companyService.getCompany(companyid);
         if(company!=null){
             reviews.setCompany(company);
             reviewsRepository.save(reviews);
-        }
+            return true;
+
+        }else{return  false;}
     }
 }

@@ -1,16 +1,14 @@
 package com.zep.JobApplication.reviews;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zep.JobApplication.companies.Company;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Reviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

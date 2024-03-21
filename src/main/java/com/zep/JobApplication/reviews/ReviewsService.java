@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ReviewsService {
     List<Reviews> getAllReviews(Long companyId);
-    void addReviews(Long companyid, Reviews reviews);
+    boolean addReviews(Long companyid, Reviews reviews);
 }

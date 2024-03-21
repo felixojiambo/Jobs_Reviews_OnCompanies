@@ -9,27 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/company/{companyid}")
+@RequestMapping("/company/")
 public class ReviewsController {
-    private  ReviewsService reviewsService;
-    private CompanyService companyService;
-    private ReviewsRepository reviewsRepository;
+    private  final ReviewsService reviewsService;
+
     public ReviewsController(ReviewsService reviewsService) {
         this.reviewsService = reviewsService;
+
     }
     @GetMapping("/reviews")
     public  ResponseEntity<List<Reviews>>getAllReviews(@PathVariable Long companyid){
         return  new ResponseEntity<>(reviewsService.getAllReviews(companyid), HttpStatus.OK);
     }
-    @PostMapping("/reviews/{companyid}")
-    public ResponseEntity<Reviews> addReviews(@PathVariable Long companyid, @RequestBody Reviews reviews) {
-        Company company = companyService.getCompany(companyid);
-        if (company != null) {
-            reviews.setCompany(company);
-            Reviews savedReview = reviewsRepository.save(reviews);
-            return ResponseEntity.ok(savedReview);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/reviews/")
+    public ResponseEntity<String> addReviews(@PathVariable Long companyid, @RequestBody Reviews reviews) {
+      boolean isReviewSaved= reviewsService.addReviews(companyid,reviews);
+      if(isReviewSaved) {
+
+          return new ResponseEntity<>("Review Added Succesfully", HttpStatus.OK);
+      } else{
+              return new  ResponseEntity<>("Review not saved",HttpStatus.NOT_FOUND);
+      }
     }
 }
