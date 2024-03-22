@@ -6,4 +6,5 @@ public interface ReviewsService {
     List<Reviews> getAllReviews(Long companyId);
     boolean addReviews(Long companyid, Reviews reviews);
     Reviews getReview(Long comapnyId, Long reviewId);
+    boolean updateReview(Long companyId,Long reviewId, Reviews reviews);
 }
