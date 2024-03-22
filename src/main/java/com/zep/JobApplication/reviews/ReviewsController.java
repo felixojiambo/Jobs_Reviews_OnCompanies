@@ -31,4 +31,8 @@ public class ReviewsController {
               return new  ResponseEntity<>("Review not saved",HttpStatus.NOT_FOUND);
       }
     }
+    @GetMapping("/reviews/{reviewsId}")
+    public  ResponseEntity<Reviews>getReview(@PathVariable Long companyId, @PathVariable Long reviewsId){
+     return new ResponseEntity<>(reviewsService.getReview(companyId,reviewsId), HttpStatus.OK);
+    }
 }

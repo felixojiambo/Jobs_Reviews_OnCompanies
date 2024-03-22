@@ -35,4 +35,11 @@ return  reviews;
 
         }else{return  false;}
     }
+
+    @Override
+    public Reviews getReview(Long comapnyId, Long reviewId) {
+       List<Reviews> reviews= reviewsRepository.findByCompanyId(comapnyId);
+        return reviews.stream().filter(review->review.getId().equals(reviewId))
+                .findFirst().orElse(null);
+    }
 }
