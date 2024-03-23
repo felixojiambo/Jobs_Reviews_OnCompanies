@@ -57,5 +57,10 @@ public class CompanyServiceImpl implements CompanyService {
         { companyRepository.deleteById(id);return true;}else
         {return false;}
     }
+
+    @Override
+    public Company getCompanyById(Long companyId) {
+        return companyRepository.getCompanyById(companyId);
+    }
 }
 

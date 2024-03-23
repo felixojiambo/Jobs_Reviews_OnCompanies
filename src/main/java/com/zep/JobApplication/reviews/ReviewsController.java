@@ -35,6 +35,15 @@ public class ReviewsController {
     public  ResponseEntity<Reviews>getReview(@PathVariable Long companyId, @PathVariable Long reviewsId){
      return new ResponseEntity<>(reviewsService.getReview(companyId,reviewsId), HttpStatus.OK);
     }
+    @DeleteMapping("/review/{reviewsId")
+    public ResponseEntity<Boolean> deleteReview(@PathVariable Long companyId, @PathVariable Long reviewId) {
+        boolean isDeleted = reviewsService.deleteReview(companyId, reviewId);
+        if (isDeleted) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
     @PutMapping("/reviews/{reviewsId}")
     public  ResponseEntity<String>updateReview(@PathVariable Long companyId,@PathVariable Long reviewsId, @RequestBody Reviews reviews){
  boolean isReviewUpdated=reviewsService.updateReview(companyId, reviewsId,reviews);

@@ -59,6 +59,7 @@ public class ReviewsServiceImpl implements ReviewsService {
             assert reviews != null;
             Company company= reviews.getCompany();
             company.getReviews().remove(reviews);
+            reviews.setCompany(null);
             companyService.updateCompany(company, companyId);
             reviewsRepository.deleteById(reviewId);
             return  true;
